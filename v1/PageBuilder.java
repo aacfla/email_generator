@@ -19,8 +19,8 @@ public class PageBuilder {
     public static void main(String[] args) {
         int week = 4;
 
-        String accessKey = "AKIAIB6UVANUR6ASILEQ";
-        String secretKey = "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";
+        String accessKey = "accessKey";
+        String secretKey = "secretKey";
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         AWSStaticCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
         AmazonS3ClientBuilder s3builder= AmazonS3ClientBuilder.standard().withCredentials(provider).withRegion("us-west-2");
