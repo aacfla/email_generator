@@ -1,0 +1,36 @@
+<html>
+<body>
+<div style="width:500px;margin-left:auto;margin-right:auto">
+    <h4>Image Generator</h4>
+    <p>Use this form to build images for the email!</p>
+    <p>Instructions:</p>
+    <form action="https://5pc6mb3122.execute-api.us-west-2.amazonaws.com/beta/BuildImageLambda"
+          style="text-align:right;padding-bottom:100px;width:350px">
+        <p>Week:<input name="week" type="text"></p>
+        <p>Announcement #:<input name="num" type="text"></p>
+        <p>Title:<input name="title" type="text"></p>
+        <p>Title Font Size:<input name="titleSize" type="number"></p>
+        <p>Subtitle:<input name="subtitle" type="text"></p>
+        <p>Subtitle Font Size:<input name="subtitleSize" type="number"></p>
+        <p>Info 1:<input name="info1" type="text"></p>
+        <p>Info 2:<input name="info2" type="text"></p>
+        <p>Info 3:<input name="info3" type="text"></p>
+        <p>Info 4:<input name="info4" type="text"></p>
+        <p>Info Font Size:<input name="infoSize" type="number"></p>
+        <p>Description:<input name="description" type="text"></p>
+        <p>Description Font Size:<input name="descSize" type="number"></p>
+        <p>Link:<input name="link" type="text"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    %s
+
+    <h4>Email Generator</h4>
+    <p>If you are done making images, generate the email here!</p>
+    <form action="https://5pc6mb3122.execute-api.us-west-2.amazonaws.com/beta/BuildEmailLambda">
+        <p>Week:<input name="week" type="text"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</div>
+</body>
+</html>
