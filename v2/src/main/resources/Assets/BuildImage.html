@@ -6,6 +6,12 @@
     <p>Instructions:</p>
     <form action="https://5pc6mb3122.execute-api.us-west-2.amazonaws.com/beta/BuildImageLambda"
           style="text-align:right;padding-bottom:100px;width:350px">
+        <p>Quarter:
+            <select name="quarter">
+                <option value="winter18">Winter 18</option>
+                <option value="spring18">Spring 18</option>
+            </select>
+        </p>
         <p>Week:<input name="week" type="text"></p>
         <p>Announcement #:<input name="num" type="text"></p>
         <p>Title:<input name="title" type="text"></p>
@@ -28,6 +34,12 @@
     <h4>Email Generator</h4>
     <p>If you are done making images, generate the email here!</p>
     <form action="https://5pc6mb3122.execute-api.us-west-2.amazonaws.com/beta/BuildEmailLambda">
+        <p>Quarter:
+            <select name="quarter">
+                <option value="winter18">Winter 18</option>
+                <option value="spring18">Spring 18</option>
+            </select>
+        </p>
         <p>Week:<input name="week" type="text"></p>
         <p><input type="submit" value="Submit"></p>
     </form>

@@ -50,8 +50,8 @@ public class PageBuilder {
         return String.format(page, image);
     }
 
-    public String buildEmail(int week) {
-        Map<String, String> images = retrieveImages(week);
+    public String buildEmail(String quarter, int week) {
+        Map<String, String> images = retrieveImages(quarter, week);
 
         String body = "";
 
@@ -75,7 +75,7 @@ public class PageBuilder {
         return String.format(page, body);
     }
 
-    public Map<String, String> retrieveImages(int week) {
+    public Map<String, String> retrieveImages(String quarter, int week) {
         AmazonS3ClientBuilder s3builder= AmazonS3ClientBuilder.standard().withCredentials(provider).withRegion("us-west-2");
         AmazonS3 s3 = s3builder.build();
 
@@ -85,7 +85,7 @@ public class PageBuilder {
 
         ListObjectsRequest request = new ListObjectsRequest()
                 .withBucketName(BUCKET)
-                .withPrefix("Week " + week + "/img_");
+                .withPrefix(quarter + "/Week " + week + "/img_");
 
         ObjectListing listing = s3.listObjects(request);
         List<S3ObjectSummary> objects = listing.getObjectSummaries();
@@ -100,6 +100,7 @@ public class PageBuilder {
         ArrayList<String> links = new ArrayList<String>();
 
         for (String key : keys) {
+            System.out.println(key);
             HashMap<String, AttributeValue> value = new HashMap<String, AttributeValue>();
             value.put("Key", new AttributeValue(key));
             GetItemResult result = dynamo.getItem(TABLE, value);

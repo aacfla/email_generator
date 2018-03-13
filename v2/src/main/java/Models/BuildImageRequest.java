@@ -1,6 +1,7 @@
 package main.java.Models;
 
 public class BuildImageRequest {
+    private String quarter;
     private int week;
     private int num;
     private String title;
@@ -15,6 +16,9 @@ public class BuildImageRequest {
     private int subtitleSize;
     private int infoSize;
     private int descSize;
+
+    public void setQuarter(String quarter) { this.quarter = quarter; }
+    public String getQuarter() { return quarter; }
 
     public void setWeek(int week) { this.week = week; }
     public int getWeek() { return week; }

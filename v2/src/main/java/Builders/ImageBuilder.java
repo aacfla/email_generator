@@ -32,6 +32,9 @@ public class ImageBuilder {
     private static int color_B[] = {232, 171, 249, 198, 246, 202, 255};
     private static String BUCKET = "BUCKET NAME";
     private static String TABLE = "TABLE NAME";
+    private String accessKey = "ACCESS KEY";
+    private String secretKey = "SECRET KEY";
+
     public static String build(BuildImageRequest request) {
         BufferedImage img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
 
@@ -165,15 +168,14 @@ public class ImageBuilder {
     }
 
     private static String uploadImage(BuildImageRequest r, File file) {
-        String accessKey = "ACCESS KEY";
-        String secretKey = "SECRET KEY";
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         AWSStaticCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
         AmazonS3ClientBuilder s3builder= AmazonS3ClientBuilder.standard()
                 .withCredentials(provider).withRegion("us-west-2");
         AmazonS3 s3 = s3builder.build();
 
-        String key = "Week " + r.getWeek() + "/img_" + r.getNum();
+//        String key = "Week " + r.getWeek() + "/img_" + r.getNum();
+        String key = r.getQuarter() + "/Week " + r.getWeek() + "/img_" + r.getNum();
 
         PutObjectRequest request = new PutObjectRequest(BUCKET, key, file)
                 .withCannedAcl(CannedAccessControlList.PublicRead);
@@ -184,8 +186,6 @@ public class ImageBuilder {
     }
 
     private static void putImageLink(BuildImageRequest r) {
-        String accessKey = "ACCESS KEY";
-        String secretKey = "SECRET KEY";
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         AWSStaticCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
         AmazonDynamoDBClientBuilder builder = AmazonDynamoDBClientBuilder.standard()
@@ -194,7 +194,7 @@ public class ImageBuilder {
 
         GetItemRequest getItemRequest = new GetItemRequest();
         HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
-        key.put("Key", new AttributeValue("Week " + r.getWeek() + "/img_" + r.getNum()));
+        key.put("Key", new AttributeValue(r.getQuarter() + "/Week " + r.getWeek() + "/img_" + r.getNum()));
         getItemRequest.setKey(key);
         getItemRequest.setTableName(TABLE);
 
